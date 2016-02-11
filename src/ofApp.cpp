@@ -3,24 +3,28 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetCircleResolution(100);
+    
+    
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    X = mouseX-512;
-    Y = mouseY-384;
+    X = mouseX-W;
+    Y = mouseY-H;
+    W = ofGetWidth()/2;
+    H = ofGetHeight()/2;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(255, 255, 255);
     ofSetColor(100, 100, 100, 128);
-    for (int i = 0; i < 33; i++){
-        ofLine(32*i, 0, 32*i, 768);
+    for (int i = 0; i < ofGetWidth(); i++){
+        ofLine(i*ofGetWidth()/30, 0, i*ofGetWidth()/30, ofGetHeight());
     }
-    for (int i = 0; i < 25; i++){
-        ofLine(0, 32*i, 1024, 32*i);
+    for (int i = 0; i < ofGetHeight(); i++){
+        ofLine(0, i*ofGetWidth()/30, ofGetWidth(), i*ofGetWidth()/30);
     }
     double a = atan2(-Y ,X);
     float b = a*180/PI;
@@ -31,15 +35,15 @@ void ofApp::draw(){
         color.setHsb((b+360)*255/360, 255, 255);
     }
     ofSetColor(color);
-    ofLine(512, 384, mouseX, mouseY);
+    ofLine(W, H, mouseX, mouseY);
     ofNoFill();
-    ofCircle(512, 384, sqrt(X*X+Y*Y));
+    ofCircle(W, H, sqrt(X*X+Y*Y));
     ofFill();
-    ofCircle(512, 384, sqrt(X*X+Y*Y)/4);
+    ofCircle(W, H, sqrt(X*X+Y*Y)/4);
     
     ofSetColor(0, 0, 0, 255);
-    ofLine(mouseX, 0, mouseX, 768);
-    ofLine(0, mouseY, 1024, mouseY);
+    ofLine(mouseX, 0, mouseX, ofGetHeight());
+    ofLine(0, mouseY, ofGetWidth(), mouseY);
 }
 
 //--------------------------------------------------------------
